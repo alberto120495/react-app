@@ -1,4 +1,3 @@
-import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,6 +5,9 @@ import {
   NavLink,
 } from "react-router-dom";
 import logo from "../logo.svg";
+
+import { LazyPage1, LazyPage2, LazyPage3 } from "../01-lazyload/pages";
+
 export default function Navigation() {
   return (
     <Router>
@@ -14,33 +16,27 @@ export default function Navigation() {
           <img src={logo} alt="React Logo" />
           <ul>
             <li>
-              <NavLink to="/" activeClassName="nav-active" exact>
-                Home
+              <NavLink to="/lazy1" activeClassName="nav-active" exact>
+                Lazy1
               </NavLink>
             </li>
             <li>
-              <NavLink to="/about" activeClassName="nav-active" exact>
-                About
+              <NavLink to="/lazy2" activeClassName="nav-active" exact>
+                Lazy2
               </NavLink>
             </li>
             <li>
-              <NavLink to="/users" activeClassName="nav-active" exact>
-                Users
+              <NavLink to="/lazy3" activeClassName="nav-active" exact>
+                Lazy3
               </NavLink>
             </li>
           </ul>
         </nav>
 
         <Switch>
-          <Route path="/about">
-            <h1>About</h1>
-          </Route>
-          <Route path="/users">
-            <h1>users</h1>
-          </Route>
-          <Route path="/">
-            <h1>Home</h1>
-          </Route>
+          <Route path="/lazy1" component={LazyPage1} />
+          <Route path="/lazy2" component={LazyPage2} />
+          <Route path="/lazy3" component={LazyPage3} />
         </Switch>
       </div>
     </Router>

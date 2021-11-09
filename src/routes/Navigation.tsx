@@ -1,44 +1,41 @@
+import { Suspense } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   NavLink,
+  Redirect,
 } from "react-router-dom";
 import logo from "../logo.svg";
 
-import { LazyPage1, LazyPage2, LazyPage3 } from "../01-lazyload/pages";
+import { routes } from "./router";
 
 export default function Navigation() {
   return (
-    <Router>
-      <div className="main-layout">
-        <nav>
-          <img src={logo} alt="React Logo" />
-          <ul>
-            <li>
-              <NavLink to="/lazy1" activeClassName="nav-active" exact>
-                Lazy1
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/lazy2" activeClassName="nav-active" exact>
-                Lazy2
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/lazy3" activeClassName="nav-active" exact>
-                Lazy3
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
+    <Suspense fallback={<span>Loading</span>}>
+      <Router>
+        <div className="main-layout">
+          <nav>
+            <img src={logo} alt="React Logo" />
+            <ul>
+              {routes.map(({ path, name }) => (
+                <li key={path}>
+                  <NavLink to={path} activeClassName="nav-active" exact>
+                    {name}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        <Switch>
-          <Route path="/lazy1" component={LazyPage1} />
-          <Route path="/lazy2" component={LazyPage2} />
-          <Route path="/lazy3" component={LazyPage3} />
-        </Switch>
-      </div>
-    </Router>
+          <Switch>
+            {routes.map(({ path, component: Component }) => (
+              <Route key={path} path={path} render={() => <Component />} />
+            ))}
+            <Redirect to={routes[0].path} />
+          </Switch>
+        </div>
+      </Router>
+    </Suspense>
   );
 }

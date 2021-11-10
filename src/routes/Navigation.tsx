@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import logo from "../logo.svg";
 
-import { routes } from "./router";
+import { routes } from "./routes";
 
 export default function Navigation() {
   return (

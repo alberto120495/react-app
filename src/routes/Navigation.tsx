@@ -5,6 +5,7 @@ import {
   Route,
   NavLink,
 } from "react-router-dom";
+import ShoppingPage from "../02-component-patterns/pages/ShoppingPage";
 import logo from "../logo.svg";
 export default function Navigation() {
   return (
@@ -15,7 +16,7 @@ export default function Navigation() {
           <ul>
             <li>
               <NavLink to="/" activeClassName="nav-active" exact>
-                Home
+                Shopping
               </NavLink>
             </li>
             <li>
@@ -39,7 +40,7 @@ export default function Navigation() {
             <h1>users</h1>
           </Route>
           <Route path="/">
-            <h1>Home</h1>
+            <ShoppingPage />
           </Route>
         </Switch>
       </div>

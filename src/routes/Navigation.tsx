@@ -1,11 +1,20 @@
-import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   NavLink,
 } from "react-router-dom";
+
+import {
+  FormikAbstractation,
+  FormikBasicPage,
+  FormikComponents,
+  FormikYupPage,
+  RegisterPage,
+} from "../03-forms/pages";
+
 import logo from "../logo.svg";
+
 export default function Navigation() {
   return (
     <Router>
@@ -14,13 +23,32 @@ export default function Navigation() {
           <img src={logo} alt="React Logo" />
           <ul>
             <li>
-              <NavLink to="/" activeClassName="nav-active" exact>
-                Home
+              <NavLink to="/register" activeClassName="nav-active" exact>
+                Register Page
               </NavLink>
             </li>
             <li>
-              <NavLink to="/about" activeClassName="nav-active" exact>
-                About
+              <NavLink to="/formik" activeClassName="nav-active" exact>
+                Formik Page
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/formik-yup" activeClassName="nav-active" exact>
+                Formik Yup
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/formik-abstrac" activeClassName="nav-active" exact>
+                Formik Abstractation
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/formik-components"
+                activeClassName="nav-active"
+                exact
+              >
+                Formik Components
               </NavLink>
             </li>
             <li>
@@ -32,11 +60,20 @@ export default function Navigation() {
         </nav>
 
         <Switch>
-          <Route path="/about">
-            <h1>About</h1>
+          <Route path="/register">
+            <RegisterPage />
           </Route>
-          <Route path="/users">
-            <h1>users</h1>
+          <Route path="/formik">
+            <FormikBasicPage />
+          </Route>
+          <Route path="/formik-yup">
+            <FormikYupPage />
+          </Route>
+          <Route path="/formik-components">
+            <FormikComponents />
+          </Route>
+          <Route path="/formik-abstrac">
+            <FormikAbstractation />
           </Route>
           <Route path="/">
             <h1>Home</h1>

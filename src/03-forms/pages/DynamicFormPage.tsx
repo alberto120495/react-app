@@ -60,7 +60,7 @@ function DynamicFormPage() {
                 );
               } else if (type === "select") {
                 return (
-                  <MySelect label={label} name={name}>
+                  <MySelect key={name} label={label} name={name}>
                     <option value="">Pick something</option>
                     {options?.map(({ id, label }) => (
                       <option key={id} value={id}>

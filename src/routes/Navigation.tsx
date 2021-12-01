@@ -1,48 +1,52 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink,
-} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import { Routes, Route, NavLink, Navigate } from "react-router-dom";
+
 import logo from "../logo.svg";
+
+import { LazyPage1, LazyPage2, LazyPage3 } from "../01-lazyload/pages/index";
+
 export default function Navigation() {
   return (
-    <Router>
+    <BrowserRouter>
       <div className="main-layout">
         <nav>
           <img src={logo} alt="React Logo" />
           <ul>
             <li>
-              <NavLink to="/" activeClassName="nav-active" exact>
-                Home
+              <NavLink
+                to="/lazy1"
+                className={({ isActive }) => (isActive ? "nav-active" : "")}
+              >
+                Lazy 1
               </NavLink>
             </li>
             <li>
-              <NavLink to="/about" activeClassName="nav-active" exact>
-                About
+              <NavLink
+                to="/lazy2"
+                className={({ isActive }) => (isActive ? "nav-active" : "")}
+              >
+                Lazy 2
               </NavLink>
             </li>
             <li>
-              <NavLink to="/users" activeClassName="nav-active" exact>
-                Users
+              <NavLink
+                to="/lazy3"
+                className={({ isActive }) => (isActive ? "nav-active" : "")}
+              >
+                Lazy 3
               </NavLink>
             </li>
           </ul>
         </nav>
 
-        <Switch>
-          <Route path="/about">
-            <h1>About</h1>
-          </Route>
-          <Route path="/users">
-            <h1>users</h1>
-          </Route>
-          <Route path="/">
-            <h1>Home</h1>
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="lazy1" element={<LazyPage1 />} />
+          <Route path="lazy2" element={<LazyPage2 />} />
+          <Route path="lazy3" element={<LazyPage3 />} />
+
+          <Route path="/*" element={<Navigate to="/lazy1" replace />} />
+        </Routes>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
